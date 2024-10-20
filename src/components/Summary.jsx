@@ -58,12 +58,16 @@ export default function Summary({ userAnswers }) {
             const correctAnswer = QUESTIONS[index].answers[0];
             let cssClass;
 
-            if (answer === correctAnswer) {
-              cssClass = 'font-bold text-[#054e37]';
-            } else if (answer === null) {
-              cssClass = 'text-[#d1baf2]';
-            } else {
-              cssClass = 'text-[#730b4b]';
+            switch (answer) {
+              case correctAnswer:
+                cssClass = 'font-bold text-[#054e37]';
+                break;
+              case null:
+                cssClass = 'text-[#d1baf2]';
+                break;
+              default:
+                cssClass = 'text-[#730b4b]';
+                break;
             }
 
             return (
@@ -77,7 +81,7 @@ export default function Summary({ userAnswers }) {
                 <p className="text-lg text-[#30273a] ">
                   {QUESTIONS[index].text}
                 </p>
-                <p className={cssClass}>{answer}</p>
+                <p className={cssClass}>{answer ?? 'Skipped'}</p>
               </li>
             );
           })}
