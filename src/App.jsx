@@ -3,7 +3,7 @@ import Quiz from './components/Quiz';
 
 function App() {
   return (
-    <div className="bg-background h-screen bg-scroll">
+    <div className="bg-background bg-cover bg-center box-border bg-fixed min-h-screen">
       <Header />
       <main>
         <Quiz />
