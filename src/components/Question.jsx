@@ -3,7 +3,11 @@ import QUESTION from '../questions.js';
 import Timer from './Timer.jsx';
 import { useState } from 'react';
 
-export default function Question({ questionIndex, onSelectAnswer }) {
+export default function Question({
+  questionIndex,
+  onSelectAnswer,
+  onSkipAnswer,
+}) {
   const question = QUESTION[questionIndex];
 
   const [answerState, setAnswerState] = useState({
@@ -52,9 +56,10 @@ export default function Question({ questionIndex, onSelectAnswer }) {
   return (
     <div>
       <Timer
-        key={questionIndex}
+        key={timer}
         timeout={timer}
-        onTimeout={() => onSelectAnswer(null)}
+        onTimeout={answerState.selectedAnswer === '' ? onSkipAnswer : null}
+        mode={answerStatus}
       />
       <h2 className="font-roboto text-2xl text-[#c1b2dd] font-bold mb-4 gap-4">
         {question.text}

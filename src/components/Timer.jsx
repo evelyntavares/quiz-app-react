@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 
-export default function Timer({ timeout, onTimeout }) {
+export default function Timer({ timeout, onTimeout, mode }) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    console.log('setting timeout');
-
     const timer = setTimeout(onTimeout, timeout);
 
     return () => {
@@ -14,7 +12,6 @@ export default function Timer({ timeout, onTimeout }) {
   }, [timeout, onTimeout]);
 
   useEffect(() => {
-    console.log('setting interval');
     const interval = setInterval(() => {
       setRemainingTime((previousRemainingTime) => previousRemainingTime - 100);
     }, 100);
@@ -24,13 +21,23 @@ export default function Timer({ timeout, onTimeout }) {
     };
   }, []);
 
+  let cssClass =
+    '[&::-webkit-progress-bar]:rounded-lg [&::-webkit-progress-value]:rounded-lg ';
+
+  if (mode === 'answered') {
+    cssClass +=
+      '[&::-webkit-progress-bar]:bg-[#6a558a] [&::-webkit-progress-value]:bg-[#f8e59c]';
+  } else {
+    cssClass +=
+      '[&::-webkit-progress-bar]:bg-[#6a558a] [&::-webkit-progress-value]:bg-[#9e5ef8]';
+  }
+
   return (
     <progress
       id="question-timer"
       value={remainingTime}
       max={timeout}
-      className="[&::-webkit-progress-bar]:rounded-lg [&::-webkit-progress-value]:rounded-lg   [&::-webkit-progress-bar]:bg-[#6a558a] 
-      [&::-webkit-progress-value]:bg-[#9e5ef8]"
+      className={cssClass}
     />
   );
 }
