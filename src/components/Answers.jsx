@@ -7,8 +7,7 @@ export default function Answers({
   return (
     <ul className="flex flex-col items-stretch gap-3 ">
       {answers.map((answer) => {
-        let cssClass =
-          'font-roboto hover:bg-[#9d5af5] hover:text-white rounded-3xl py-4 px-8 size-full';
+        let cssClass = 'font-roboto rounded-3xl py-4 px-8 size-full';
 
         const isSelected = selectedAnswer === answer;
 
@@ -26,7 +25,7 @@ export default function Answers({
               break;
           }
         } else {
-          cssClass += ' bg-[#6cb7f5]';
+          cssClass += ' bg-[#6cb7f5] hover:bg-[#9d5af5] hover:text-white ';
         }
 
         return (
